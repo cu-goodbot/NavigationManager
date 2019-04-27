@@ -11,7 +11,9 @@ import numpy as np
 from std_msgs.msg import String
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
-from navigation_manager.msg import Scene, Intent
+from intent_recognizer.msg import Intent
+from scene_understanding.msg import Scene
+# from navigation_manager.msg import Scene, Intent
 
 UPDATE_RATE = 5 # [Hz]
 

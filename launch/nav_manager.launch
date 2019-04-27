@@ -1,0 +1,7 @@
+<!-- Navigation manager node launch file -->
+
+<launch>
+
+    <node pkg="navigation_manager" type="nav_manager.py" name="navigation" />
+
+</launch>
