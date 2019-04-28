@@ -2,6 +2,6 @@
 
 <launch>
 
-    <node pkg="navigation_manager" type="nav_manager.py" name="navigation" />
+    <node pkg="navigation_manager" type="nav_manager.py" name="navigation" output="screen"/>
 
 </launch>

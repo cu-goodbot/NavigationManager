@@ -78,8 +78,8 @@ class NavManager(object):
         if intent.poi_present:
 
             # get dpeth and angle in image frame of poi
-            depth = intent.poi_depth
-            angle = np.deg2rad(intent.poi_angle)
+            depth = intent.poi_objects[0].poi_depth
+            angle = np.deg2rad(intent.poi_objects[0].poi_angle)
 
             # compute new goal using current position and poi data
             goal_x = pose.position.x + depth*np.cos(angle)
