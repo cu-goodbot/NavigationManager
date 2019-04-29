@@ -6,6 +6,7 @@ Navigation node outputs waypoint goals for the robot using odometry, scene info 
 
 import os
 import rospy
+import tf
 import numpy as np
 
 from std_msgs.msg import String
@@ -78,19 +79,19 @@ class NavManager(object):
         if intent.poi_present:
 
             # get dpeth and angle in image frame of poi
-            depth = intent.poi_objects[0].poi_depth
+            depth = intent.poi_objects[0].poi_depth - 0.1
             angle = np.deg2rad(intent.poi_objects[0].poi_angle)
 
             # compute new goal using current position and poi data
             goal_x = pose.position.x + depth*np.cos(angle)
-            goal_y = pose.position.y + depth*np.sin(angle)
+            goal_y = pose.position.y - depth*np.sin(angle)
 
         else:
 
             goal_x = pose.position.x + intent.forward_distance
             goal_y = pose.position.y
 
-        return [goal_x,goal_y]
+        return [goal_x,goal_y,angle]
 
     def gen_goal_msg(self,goal):
         """
@@ -110,6 +111,12 @@ class NavManager(object):
 
         msg.pose.position.x = goal[0]
         msg.pose.position.y = goal[1]
+
+        orient = tf.transformations.quaternion_from_euler(0,0,-goal[2])
+        msg.pose.orientation.x = orient[0]
+        msg.pose.orientation.y = orient[1]
+        msg.pose.orientation.z = orient[2]
+        msg.pose.orientation.w = orient[3]
 
         return msg
 
