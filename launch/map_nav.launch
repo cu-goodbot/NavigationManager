@@ -1,7 +1,7 @@
 <!-- 2D Map navigation Demo -->
 
 <launch>
-    <arg name="map_file" default="test_zone"/>
+    <arg name="map_file" default="empty_map"/>
     <arg name="use_waypoints" default="false"/>
     <arg name="sim" default="false"/>
     <arg name="local" default="true"/>
